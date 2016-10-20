@@ -1,0 +1,8 @@
+[package]
+name = "rust_accountkit"
+version = "0.1.0"
+authors = ["giang nguyen <nguyengiangdev@gmail.com>"]
+
+[dependencies]
+hyper="0.9.10"
+url = "1.2.1"
