@@ -72,11 +72,17 @@ impl Util {
     }
 }
 
+pub fn get_app_access_token<'a>(facebook_app_id: &'a str,
+                                account_kit_app_secret: &'a str)
+                                -> String {
+    format!("AA|{}|{}", facebook_app_id, account_kit_app_secret)
+}
+
 
 #[cfg(test)]
 
 mod test {
-    use util::Util;
+    use util::*;
 
     #[test]
     fn test_parse_endpoint() {
@@ -168,5 +174,12 @@ mod test {
         let expect = "https://graph.accountkit.com/v1.\
                       0/me?access_token=app_token&appsecret_proof=app_proof_key";
         assert_eq!(expect, url.into_string());
+    }
+
+    #[test]
+    fn test_get_app_access_token() {
+        let result = get_app_access_token("facebook_app_id", "account_kit_app_secret");
+        let expect = "AA|facebook_app_id|account_kit_app_secret";
+        assert_eq!(expect, result);
     }
 }

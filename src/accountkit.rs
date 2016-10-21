@@ -72,7 +72,6 @@ impl AccountKit {
 #[cfg(test)]
 
 mod test {
-    use token::Token;
     use AccountKit;
     use util::Util;
 
