@@ -70,16 +70,6 @@ impl AccountKit {
 
 
 #[cfg(test)]
-
 mod test {
-    use AccountKit;
-    use util::Util;
-
-    #[test]
-    fn test_send_request() {
-        let account_kit = AccountKit::new();
-        let url = "https://www.google.com.vn";
-        let response = account_kit.user_authorization(url);
-        assert!(response.is_ok());
-    }
+    // Todo
 }
