@@ -3,6 +3,12 @@ name = "rust_accountkit"
 version = "0.1.0"
 authors = ["giang nguyen <nguyengiangdev@gmail.com>"]
 
+description = "Facebook Accountkit for Rust"
+repository = "https://github.com/hngiang/rust-accountkit"
+readme = "README.md"
+keywords = ["accountkit", "rust account kit"]
+license = "MIT/Apache-2.0"
+
 [dependencies]
 hyper="0.9.10"
 url = "1.2.1"
