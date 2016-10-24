@@ -9,15 +9,27 @@
 
 //! rust-accountkit is an implementation of the [Facebook Accountkit](https://developers.facebook.com/docs/accountkit).
 //!
-//! It builds with [Cargo](http://crates.io/).
+//! # Example
+//! ```rust,ignore
+//! let app_token = format!("AA|{}|{}", "facebook_app_id", "account_kit_client_secret");
 //!
-//!
+//! let account_kit = AccountKit::with_token(app_token.as_str(), None);
+//! // If you have enabled the Require App Secret setting in your app's dashboards, most calls that accept an account access token as a parameter will now require an additional appsecret_proof parameter to verify that these calls are coming from your own servers.
+//! // app secret proof is a sha256 hash of your access token, using the app secret as the key
+//! let account_kit = AccountKit::with_token(app_token.as_str(), "appsecret_proof_key");
+//! let response = account_kit.authorization_code("authorization_code").retriev();
+//! match response {
+//!  Ok(user_token) => println!("{:?}", user_token),
+//!  Err(err) => println!("{}", err.to_string())
+//! }
+//! ```
 
 extern crate hyper;
 extern crate url;
 
 pub use accountkit::AccountKit;
 pub use request::RequestBuilder;
+pub use request::dorequest::AccountKitResponse;
 pub use error::AccountKitError;
 
 mod accountkit;

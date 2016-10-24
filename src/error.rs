@@ -15,7 +15,7 @@ use std::io;
 
 #[derive(Debug)]
 pub enum AccountKitError {
-    KindError(error::Error),
+    HttpError(error::Error),
     UrlError(ParseError),
     IoError(io::Error),
 }
@@ -23,7 +23,7 @@ pub enum AccountKitError {
 
 impl From<error::Error> for AccountKitError {
     fn from(err: error::Error) -> AccountKitError {
-        AccountKitError::KindError(err)
+        AccountKitError::HttpError(err)
     }
 }
 
@@ -42,7 +42,7 @@ impl From<io::Error> for AccountKitError {
 impl fmt::Display for AccountKitError {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match *self {
-            AccountKitError::KindError(ref err) => write!(f, "{}", err),
+            AccountKitError::HttpError(ref err) => write!(f, "{}", err),
             AccountKitError::UrlError(ref err) => write!(f, "{}", err),
             AccountKitError::IoError(ref err) => write!(f, "{}", err),
         }

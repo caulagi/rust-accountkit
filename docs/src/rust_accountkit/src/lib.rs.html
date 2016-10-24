@@ -64,6 +64,21 @@
 <span id="20">20</span>
 <span id="21">21</span>
 <span id="22">22</span>
+<span id="23">23</span>
+<span id="24">24</span>
+<span id="25">25</span>
+<span id="26">26</span>
+<span id="27">27</span>
+<span id="28">28</span>
+<span id="29">29</span>
+<span id="30">30</span>
+<span id="31">31</span>
+<span id="32">32</span>
+<span id="33">33</span>
+<span id="34">34</span>
+<span id="35">35</span>
+<span id="36">36</span>
+<span id="37">37</span>
 </pre><pre class='rust '>
 <span class='comment'>// Copyright 2013-2015 The rust-accountkit developers.</span>
 <span class='comment'>//</span>
@@ -76,17 +91,32 @@
 
 <span class='doccomment'>//! rust-accountkit is an implementation of the [Facebook Accountkit](https://developers.facebook.com/docs/accountkit).</span>
 <span class='doccomment'>//!</span>
-<span class='doccomment'>//! It builds with [Cargo](http://crates.io/).</span>
+<span class='doccomment'>//! # Example</span>
+<span class='doccomment'>//! ```rust,ignore</span>
+<span class='doccomment'>//! let app_token = format!(&quot;AA|{}|{}&quot;, &quot;facebook_app_id&quot;, &quot;account_kit_client_secret&quot;);</span>
 <span class='doccomment'>//!</span>
-<span class='doccomment'>//!</span>
+<span class='doccomment'>//! let account_kit = AccountKit::with_token(app_token.as_str(), None);</span>
+<span class='doccomment'>//! // If you have enabled the Require App Secret setting in your app&#39;s dashboards, most calls that accept an account access token as a parameter will now require an additional appsecret_proof parameter to verify that these calls are coming from your own servers.</span>
+<span class='doccomment'>//! // app secret proof is a sha256 hash of your access token, using the app secret as the key</span>
+<span class='doccomment'>//! let account_kit = AccountKit::with_token(app_token.as_str(), &quot;appsecret_proof_key&quot;);</span>
+<span class='doccomment'>//! let response = account_kit.authorization_code(&quot;authorization_code&quot;).retriev();</span>
+<span class='doccomment'>//! match response {</span>
+<span class='doccomment'>//!  Ok(user_token) =&gt; println!(&quot;{:?}&quot;, user_token),</span>
+<span class='doccomment'>//!  Err(err) =&gt; println!(&quot;{}&quot;, err.to_string())</span>
+<span class='doccomment'>//! }</span>
+<span class='doccomment'>//! ```</span>
 
-<span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>error</span>::{<span class='ident'>UtilError</span>, <span class='ident'>AccountKitError</span>};
-<span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>util</span>::{<span class='ident'>Util</span>, <span class='ident'>UtilResult</span>, <span class='ident'>get_app_access_token</span>};
-<span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>accountkit</span>::{<span class='ident'>AccountKit</span>, <span class='ident'>AccountKitResponse</span>, <span class='ident'>AccountKitResult</span>};
+<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>hyper</span>;
+<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>url</span>;
 
-<span class='kw'>mod</span> <span class='ident'>error</span>;
-<span class='kw'>mod</span> <span class='ident'>util</span>;
+<span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>accountkit</span>::<span class='ident'>AccountKit</span>;
+<span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>request</span>::<span class='ident'>RequestBuilder</span>;
+<span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>request</span>::<span class='ident'>dorequest</span>::<span class='ident'>AccountKitResponse</span>;
+<span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>error</span>::<span class='ident'>AccountKitError</span>;
+
 <span class='kw'>mod</span> <span class='ident'>accountkit</span>;
+<span class='kw'>mod</span> <span class='ident'>request</span>;
+<span class='kw'>mod</span> <span class='ident'>error</span>;
 </pre>
 </section>
     <section id='search' class="content hidden"></section>

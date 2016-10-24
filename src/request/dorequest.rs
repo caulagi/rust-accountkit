@@ -1,5 +1,15 @@
+// Copyright 2013-2014 The giangnh developers.
+//
+// Licensed under the Apache License, Version 2.0 <LICENSE-APACHE or
+// http://www.apache.org/licenses/LICENSE-2.0> or the MIT license
+// <LICENSE-MIT or http://opensource.org/licenses/MIT>, at your
+// option. This file may not be copied, modified, or distributed
+// except according to those terms.
+
+
 use std::result::Result;
 use std::io::Read;
+use std::fmt;
 
 use error::AccountKitError;
 
@@ -14,9 +24,24 @@ pub trait BaseRequest {
 
 #[derive(Debug)]
 pub struct AccountKitResponse {
-    body: String,
-    status_code: u16,
-    canonical_reason: Option<&'static str>,
+    pub body: String,
+    pub status_code: u16,
+    pub canonical_reason: Option<&'static str>,
+}
+
+impl fmt::Display for AccountKitResponse {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f,
+               "body: {}\nstatus_code: {} \ncanonical_reason: {} \n
+               ",
+               self.body,
+               self.status_code,
+               if self.canonical_reason.is_some() {
+                   self.canonical_reason.unwrap()
+               } else {
+                   "None"
+               })
+    }
 }
 
 pub trait DoRequest: BaseRequest {
