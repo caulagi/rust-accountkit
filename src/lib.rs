@@ -13,10 +13,13 @@
 //!
 //!
 
-pub use error::{UtilError, AccountKitError};
-pub use util::{Util, UtilResult, get_app_access_token};
-pub use accountkit::{AccountKit, AccountKitResponse, AccountKitResult};
+extern crate hyper;
+extern crate url;
 
-mod error;
-mod util;
+pub use accountkit::AccountKit;
+pub use request::RequestBuilder;
+pub use error::AccountKitError;
+
 mod accountkit;
+mod request;
+mod error;

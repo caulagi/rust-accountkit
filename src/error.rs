@@ -6,45 +6,18 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-extern crate url;
-extern crate hyper;
-
 use std::fmt;
 use std::convert::From;
 
-use self::url::ParseError;
-use self::hyper::error;
-
-#[derive(Debug)]
-pub enum UtilError {
-    UrlError(ParseError),
-    TupleError(()),
-}
-
-impl From<ParseError> for UtilError {
-    fn from(err: ParseError) -> UtilError {
-        UtilError::UrlError(err)
-    }
-}
-
-impl From<()> for UtilError {
-    fn from(err: ()) -> UtilError {
-        UtilError::TupleError(err)
-    }
-}
-
-impl fmt::Display for UtilError {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        match *self {
-            UtilError::UrlError(ref err) => write!(f, "{}", err),
-            UtilError::TupleError(()) => write!(f, "{}", "URL is cannot-be-a-base"),
-        }
-    }
-}
+use url::ParseError;
+use hyper::error;
+use std::io;
 
 #[derive(Debug)]
 pub enum AccountKitError {
     KindError(error::Error),
+    UrlError(ParseError),
+    IoError(io::Error),
 }
 
 
@@ -54,10 +27,24 @@ impl From<error::Error> for AccountKitError {
     }
 }
 
+impl From<ParseError> for AccountKitError {
+    fn from(err: ParseError) -> AccountKitError {
+        AccountKitError::UrlError(err)
+    }
+}
+
+impl From<io::Error> for AccountKitError {
+    fn from(err: io::Error) -> AccountKitError {
+        AccountKitError::IoError(err)
+    }
+}
+
 impl fmt::Display for AccountKitError {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match *self {
             AccountKitError::KindError(ref err) => write!(f, "{}", err),
+            AccountKitError::UrlError(ref err) => write!(f, "{}", err),
+            AccountKitError::IoError(ref err) => write!(f, "{}", err),
         }
     }
 }
