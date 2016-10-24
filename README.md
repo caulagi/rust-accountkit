@@ -6,7 +6,7 @@
 
 ### Documentation
 
-[Released](https://hngiang.github.io/rust-accountkit/rust_accountkit/)
+[Released](https://hngiang.github.io/rust-accountkit/rust_accountkit/index.html)
 
 
 ## Overview
