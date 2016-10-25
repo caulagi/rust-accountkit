@@ -1,6 +1,7 @@
 [![Build Status](https://travis-ci.org/hngiang/rust-accountkit.svg?branch=master)](https://travis-ci.org/hngiang/rust-accountkit)
 [![Build status](https://ci.appveyor.com/api/projects/status/uby2x340mmq8nxlp?svg=true)](https://ci.appveyor.com/project/hngiang/rust-accountkit)
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
+[![crates.io](https://img.shields.io/crates/v/rust_accountkit.svg)](https://crates.io/crates/rust_accountkit)
 
 # Rust Accountkit
 
