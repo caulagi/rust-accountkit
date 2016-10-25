@@ -6,7 +6,7 @@ authors = ["giang nguyen <nguyengiangdev@gmail.com>"]
 description = "Facebook Accountkit for Rust"
 repository = "https://github.com/hngiang/rust-accountkit"
 readme = "README.md"
-keywords = ["accountkit", "rust account kit"]
+keywords = ["accountkit", "rust_accountkit"]
 license = "MIT/Apache-2.0"
 
 [dependencies]
