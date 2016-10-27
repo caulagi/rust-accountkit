@@ -10,6 +10,7 @@
 use std::result::Result;
 use std::io::Read;
 use std::fmt;
+use std::time::Duration;
 
 use error::AccountKitError;
 
@@ -46,8 +47,11 @@ impl fmt::Display for AccountKitResponse {
 
 pub trait DoRequest: BaseRequest {
     fn retriev_json(&self) -> Result<AccountKitResponse, AccountKitError> {
+        let duration = Duration::from_secs(10);
         let url = try!(Url::parse(self.url()));
         let fresh_net = try!(request::Request::new(self.method(), url));
+        fresh_net.set_read_timeout(Some(duration));
+        fresh_net.set_write_timeout(Some(duration));
         let streaming_req = try!(fresh_net.start());
         let mut response = try!(streaming_req.send());
         let mut s = String::new();
