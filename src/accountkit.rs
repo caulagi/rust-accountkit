@@ -77,6 +77,7 @@ fn append_appsecret_proof<'a>(url: &mut String, value: Option<&'a str>) {
     }
 }
 
+
 #[test]
 fn test_append_appsecret_proof() {
     let mut url = "https://example.com/?access_token=token".to_string();
