@@ -50,8 +50,8 @@ pub trait DoRequest: BaseRequest {
         let duration = Duration::from_secs(10);
         let url = try!(Url::parse(self.url()));
         let fresh_net = try!(request::Request::new(self.method(), url));
-        fresh_net.set_read_timeout(Some(duration)).unwrap();
-        fresh_net.set_write_timeout(Some(duration)).unwrap();
+        try!(fresh_net.set_read_timeout(Some(duration)));
+        try!(fresh_net.set_write_timeout(Some(duration)));
         let streaming_req = try!(fresh_net.start());
         let mut response = try!(streaming_req.send());
         let mut s = String::new();
